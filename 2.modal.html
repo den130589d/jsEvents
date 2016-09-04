@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.item{
+			width: 300px;
+			height: 300px;
+			border: 1px solid black;
+			
+		}
+		.modal{
+			width: 500px;
+			height: 200px;
+			border: 1px solid black;
+			
+		}
+		.modal>img{
+			width: 50px;
+			height: 50px;
+		}
+		.none{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="item" >
+		<figure>
+			<img  src="google.jpg" alt="picture description">
+			<figcaption>Some title</figcaption>
+		</figure>
+		<button id="show">Show info</button>
+	</div>
+
+	<div class="modal none">
+		<img src="" alt="">
+		<div class="info-box">
+			<p>Описание: <span class="bold">Содержимое атрибута alt</span></p>
+			<p>Путь: <span class="bold">Содержимое атрибута src</span></p>
+			<p>Title: <span class="bold">Содержимое элемента figcaption</span></p>
+		<button id="close">ok</button>	
+		</div>
+	</div>
+
+	<div class="item">
+		<figure>
+			<img data-target="img" src="google.jpg" alt="picture description">
+			<figcaption>Some title</figcaption>
+		</figure>
+		<button id="show">Show info</button>
+	</div>
+
+	<div class="modal none">
+		<img src="" alt="">
+		<div class="info-box">
+			<p>Описание: <span class="bold">Содержимое атрибута alt</span></p>
+			<p>Путь: <span class="bold">Содержимое атрибута src</span></p>
+			<p>Title: <span class="bold">Содержимое элемента figcaption</span></p>
+		<button id="close">ok</button>	
+		</div>
+	</div>
+	
+	<script>
+		var m = document.getElementsByClassName('modal')[0];
+		var item = document.getElementsByClassName('item');
+		for (var i = 0; i < item.length; i++) {
+			item[i].getElementsByTagName('button')[0].addEventListener('click', show);
+		};
+		function show() {
+			m.style.display = 'block';
+			var src = this.previousElementSibling.firstElementChild.getAttribute('src');
+			var alt = this.previousElementSibling.firstElementChild.getAttribute('alt');
+			var title = this.previousElementSibling.firstElementChild.nextElementSibling.innerHTML;
+			document.getElementsByTagName('span')[0].innerHTML = alt;
+			document.getElementsByTagName('span')[1].innerHTML = src;
+			document.getElementsByTagName('span')[2].innerHTML = title;
+			m.firstElementChild.setAttribute('src', src);
+			m.firstElementChild.setAttribute('alt', alt);
+		}
+		m.addEventListener('click',close);
+		function close() {
+			m.style.display = 'none';
+		}
+		
+		// var mod = document.getElementById('modal');
+		// document.getElementById('show').addEventListener('click', show);
+		// function show() {
+		// 	mod.classList.remove('none');
+		// 	var alt = document.getElementsByTagName('img')[0].getAttribute('alt');
+		// 	var src = document.getElementsByTagName('img')[0].getAttribute('src');
+		// 	var title = document.getElementsByTagName('figcaption')[0].innerHTML;
+		// 	document.getElementsByTagName('span')[0].innerHTML = alt;
+		// 	document.getElementsByTagName('span')[1].innerHTML = src;
+		// 	document.getElementsByTagName('span')[2].innerHTML = title;
+		// }
+		// document.getElementById('close').addEventListener('click', close);
+		// function close() {
+		// 	mod.classList.add('none');
+		// }
+	</script>
+</body>
+</html>

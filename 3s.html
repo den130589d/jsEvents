@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="form-group">
+			<input type="text" data-max="50" class="inp">
+		<div class="counter">
+			<span class="current">25</span> 
+			<span class="max">50</span>
+		</div>
+		<p class="message"></p>
+	</div>
+	<script>
+		var len = 0;
+		var symbol = document.getElementsByTagName('input')[0];
+		var a = symbol.dataset.max;
+		var sp = document.getElementsByTagName('span')[0];
+		var p = document.getElementsByTagName('p')[0];
+		
+		symbol.addEventListener('keydown', current);
+		function current() {
+			len = symbol.value.length;
+			
+			if(len<=a){
+				sp.innerHTML = len;
+			} else {
+				sp.style.color = 'red';
+				sp.nextElementSibling.innerHTML = len;
+				p.innerHTML = 'Вы привысили лимит!';
+			}
+		}
+	</script>
+</body>
+</html>
